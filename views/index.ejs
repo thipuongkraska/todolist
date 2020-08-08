@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>bai tap</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <h3> <% dulieu.forEach(function(item) { %>
+      <div class="textbox">
+        <%= item %>
+        <input type="checkbox"
+               name="ten"
+               value="<%= item.ten %>"
+               onclick="this.form.submit();" />
+      </div> <br />
+    <% }) %> </h3>
+    <form class="" action="/" method="post">
+      <input type="text" name="nhapdulieu" value="">
+      <input type="submit" name="submit" value="submit">
+    </form>
+
+  <h2> <%= loiket %> </h2>
+  </body>
+</html>
