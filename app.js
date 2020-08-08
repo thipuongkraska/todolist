@@ -6,6 +6,7 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
+app.set("views", "./views");
 ///const arraydulieu = ["an uong", "ngu nghi", "di choi"];
 const conclusion = "Hoc xong roi!";
 //////////////KET NOI VOI DATABASE
@@ -36,11 +37,11 @@ const newSchema = new mongoose.Schema({
 const Activity = mongoose.model("Activity", newSchema);
 
 ////////////////////
-app.get("/", function(req,res) {
+app.get("/", async function(req,res) {
 
   ///res.render("index", {dulieu: arraydulieu, loiket: conclusion});///day la phan gianh cho ejs
-  const postDulieu = Activity.find();  ///du lieu tra ve la mot array
-  res.render("index", {dulieu: postDulieu});
+  const postDulieu = await Activity.find({});  ///du lieu tra ve la mot array
+  res.render("index", {dulieu: postDulieu, loiket: conclusion});
 
 });
 
@@ -49,7 +50,12 @@ app.post("/", async function(req,res) {
   await newActivity.save();
   res.redirect("/");
 });
-
+ app.post("/delete", async function(req,res) {
+   const ten = req.body.ten;
+   console.log(ten);
+   await Activity.findOneAndRemove({name: ten});
+   res.redirect("/");
+ })
 
 
 
